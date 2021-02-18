@@ -11,6 +11,28 @@ def detectFace(img):
     return ret
 
 
+def effects(img,type):
+    if type.lower()=="blur":
+       func=lambda img: cv.blur(img,(20,20)) 
+    elif type.lower()=="moisac":
+    #    func=lambda img: cv.resize(img,(16,16),interpolation=cv.INTER_LINEAR)
+        print()
+    elif type.lower()=="flip":
+        func=lambda img:cv.flip(img,0)
+    elif type.lower()=="pewdiepie":
+        pie="img/pewdiepie.jpg"
+        pieWall=cv.imread(pie)
+        func=lambda img: cv.resize(pieWall,(img.shape[0],img.shape[1]))            
+    else:
+        print("unknown effect type!")
+        return None
+
+    ret=detectFace(img)
+    for (x,y,h,w) in ret:
+        img[y:y+h,x:x+w]=func(img[y:y+h,x:x+w])
+    return img
+
+
 def boxFace(img,BOX=True,OUTLINE=False):
     if not BOX and OUTLINE:
         print("Can't shape outline without value BOX=True\n\n")
@@ -49,8 +71,6 @@ def boxFace(img,BOX=True,OUTLINE=False):
 
 
 
-# cv.imshow('ret',ret)
-out=boxFace(img,OUTLINE=True)
-cv.imshow("",out)
+# cv.imshow("",cv.resize(effects(img,"pewdiepie"),None,fx=1/3,fy=1/3))
 cv.waitKey(0)
 cv.destroyAllWindows()
