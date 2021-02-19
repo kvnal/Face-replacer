@@ -1,7 +1,6 @@
 import cv2 as cv
 import numpy as np
 
-
 img= cv.imread('img/faces.jpg')
 
 def detectFace(img):
@@ -17,12 +16,19 @@ def effects(img,type):
     elif type.lower()=="moisac":
     #    func=lambda img: cv.resize(img,(16,16),interpolation=cv.INTER_LINEAR)
         print()
+    elif type.lower()=="cartoon":
+        def func(img):
+            edge=cv.adaptiveThreshold(cv.cvtColor(img,cv.COLOR_BGR2GRAY),255,cv.ADAPTIVE_THRESH_MEAN_C,cv.THRESH_BINARY,11,5)
+            edgeSmooth=cv.medianBlur(edge,5)
+            return cv.bitwise_and(img,img,mask=edgeSmooth)
     elif type.lower()=="flip":
         func=lambda img:cv.flip(img,0)
     elif type.lower()=="pewdiepie":
         pie="img/pewdiepie.jpg"
         pieWall=cv.imread(pie)
         func=lambda img: cv.resize(pieWall,(img.shape[0],img.shape[1]))            
+    elif type.lower()=="beauty":
+        func=lambda img: cv.fastNlMeansDenoisingColored(img,None,7,7,5)
     else:
         print("unknown effect type!")
         return None
@@ -71,6 +77,6 @@ def boxFace(img,BOX=True,OUTLINE=False):
 
 
 
-# cv.imshow("",cv.resize(effects(img,"pewdiepie"),None,fx=1/3,fy=1/3))
+cv.imshow("",cv.resize(effects(img,"beauty"),None,fx=1/3,fy=1/3))
 cv.waitKey(0)
 cv.destroyAllWindows()
