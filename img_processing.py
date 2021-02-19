@@ -29,6 +29,17 @@ def effects(img,type):
         func=lambda img: cv.resize(pieWall,(img.shape[0],img.shape[1]))            
     elif type.lower()=="beauty":
         func=lambda img: cv.fastNlMeansDenoisingColored(img,None,7,7,5)
+    elif type.lower()=="xi":
+        eye=cv.CascadeClassifier("haar_cascade/eye.xml")
+        char="X"
+        # █ ▒ Ø Ǒ ♥
+        color=(255,255,0)
+        def func(img):
+            Gimg=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+            ret=eye.detectMultiScale(Gimg,1.2,2)
+            for (x,y,w,h) in ret:
+                cv.putText(img,char,(x,y+h),cv.FONT_HERSHEY_COMPLEX_SMALL,color=color,fontScale=2,thickness=3)
+            return img
     else:
         print("unknown effect type!")
         return None
@@ -77,6 +88,6 @@ def boxFace(img,BOX=True,OUTLINE=False):
 
 
 
-cv.imshow("",cv.resize(effects(img,"beauty"),None,fx=1/3,fy=1/3))
+cv.imshow("",cv.resize(effects(img,"xi"),None,fx=1/3,fy=1/3))
 cv.waitKey(0)
 cv.destroyAllWindows()
