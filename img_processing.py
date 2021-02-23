@@ -5,12 +5,13 @@ import numpy as np
 class process:
     
     def __init__(self,image):
+        self.path=image
         self.img=cv.imread(image)
         self.face = cv.CascadeClassifier('haar_cascade/face.xml')
         self.Gimg =cv.cvtColor(self.img,cv.COLOR_BGR2GRAY)
         self.ret =self.face.detectMultiScale(self.Gimg,1.3,4)
         
-    save= lambda self,output:cv.imwrite("_processed.png",output)
+    save= lambda self,output:cv.imwrite(self.path[:-4]+"_processed.png",output)
         
     def effects(self,type):
         img=self.img
@@ -63,7 +64,8 @@ class process:
     def boxFace(self,BOX=True,OUTLINE=False):
         img=self.img
         if not BOX and OUTLINE:
-            print("Can't shape outline without value BOX=False\n\n")
+            # print("Can't shape outline without value BOX=False\n\n")
+            print("Can't shape outline without type -t \"noBox\"\n\n")
             return None
         
         output=img.copy()
@@ -95,7 +97,3 @@ class process:
                 return self.save(output)
                 # return output
         return None #
-            
-
-if __name__ =="__main__":
-    pass
