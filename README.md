@@ -11,29 +11,29 @@
 - ### Samples
   - face swap (_randomly_)```(<path> -m replace)```<br>
     ![replace](sample/replace.png)
-    <br>
+    <br><br>
   - face swap **noBox** ```(<path> -m replace -t noBox)```<br>
     ![replace](sample/noBox.png)
-    <br>
+    <br><br>
   - Anti ageing / Beauty  ```(<path> -m effects -t beauty)```<br>
     ![replace](sample/beauty.png)
-    <br>
+    <br><br>
   - Cartoon  ```(<path> -m effects -t cartoon)```<br>
     ![replace](sample/cartoon.png)
-    <br>
+    <br><br>
   - Blur  ```(<path> -m effects -t blur)```<br>
     ![replace](sample/blur.png)
-    <br>
+    <br><br>
   - Flip  ```(<path> -m effects -t flip)```<br>
     ![replace](sample/flip.png) 
-    <br>
+    <br><br>
   - Pewdiepie  ```(<path> -m effects -t pewdiepie)```<br>
     ![replace](sample/pew.png) ![pewdiepie](sample/pew%20youtube.png)
-    <br>
+    <br><br>
   - X Eye  ```(<path> -m effects -t xi)```<br>
     ![replace](sample/xi.png) 
-    <br>
+    <br><br>
   - ### Original
     ![replace](sample/faces.jpg)
-    <br>
+
  
